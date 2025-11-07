@@ -52,3 +52,90 @@ body {
   font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
+:root {
+  --dark-background-color: #397367;
+  --light-background-color: #DEEDEA;
+  --light-font-color: #DEEDEA;
+  --dark-font-color: #162724;
+  --light-dark-background-color: #A5D3C9; 
+  --standard-border: 3px solid var(--dark-background-color);
+  --dark-border: 3px solid var(--dark-font-color);
+  --standard-radius: 20px;
+}
+
+.dropdown-selected {
+  border-right: var(--standard-border);
+  border-bottom: var(--standard-border);
+  border-color: var(--dark-font-color);
+  padding: 10px;
+  min-width: 200px;
+  text-align: center;
+  border-top-left-radius: var(--standard-radius);
+  border-bottom-left-radius: var(--standard-radius);
+  z-index: 2;
+  background-color: var(--light-background-color);
+}
+
+
+.dropdown-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
+}
+
+.dropdown {
+    position: absolute;
+    display: flex;
+    background-color: var(--dark-background-color);
+    flex-direction: column;
+    border: var(--dark-border);
+    border-radius: var(--standard-radius);
+    box-shadow: 5px 5px 5px rgba(0,0,0, 0.4);
+    overflow: hidden;
+    width: 100%;
+    top: 0px;
+    z-index: 1;
+}
+
+
+.dropdown-element:first-of-type {
+  padding-top: 60px;
+  border-top-left-radius: var(--standard-radius);
+  border-top-right-radius: var(--standard-radius);
+}
+
+.dropdown-element:last-of-type {
+  border-bottom: none;
+}
+
+.dropdown-element {
+  border-bottom: var(--dark-border);
+  width: 100%;
+  padding: 10px;
+  color: var(--light-font-color);
+}
+
+.dropdown-element:hover {
+  background-color: var(--light-background-color);
+  color: var(--dark-font-color);
+}
+
+.show-dropdown-button {
+  border-radius: var(--standard-radius);
+  border-bottom: 4px solid var(--dark-font-color);
+  border-right: 4px solid var(--dark-font-color);;
+  background-color: var(--dark-background-color);
+  color: var(--light-font-color);
+  padding: 10px 30px 10px 30px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  margin: 0px;
+  z-index: 2;
+}
+
+button:hover {
+  background-color: var(--light-dark-background-color);
+  color: var(--dark-font-color);
+  cursor: pointer;
+}
