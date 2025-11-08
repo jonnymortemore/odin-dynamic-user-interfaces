@@ -32,9 +32,10 @@ export class Dropdown {
     }
 
     createDropdownElement(content) {
-        const dropdownEl = document.createElement("div");
+        const dropdownEl = document.createElement("a");
         dropdownEl.className = "dropdown-element";
-        dropdownEl.innerText = content;
+        dropdownEl.innerText = content.name;
+        dropdownEl.href = content.target;
         this.dropdown.appendChild(dropdownEl);
     }
 

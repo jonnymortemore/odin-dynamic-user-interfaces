@@ -6,7 +6,13 @@ import { Dropdown } from "./dropdown"
 console.log(new Dropdown(
     "selectedValue",
     [
-        "dropdown-1",
-        "dropdown-2"
+        {
+            name: "dropdown-1",
+            target: "#target1"
+        },
+        {
+            name: "dropdown-2",
+            target: "#target2"
+        },
     ]
 ));
