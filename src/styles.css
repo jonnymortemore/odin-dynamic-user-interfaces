@@ -63,6 +63,14 @@ body {
   --standard-radius: 20px;
 }
 
+body {
+  padding-top: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .dropdown-selected {
   border-right: var(--standard-border);
   border-bottom: var(--standard-border);
@@ -95,6 +103,7 @@ body {
     overflow: hidden;
     width: 100%;
     top: 0px;
+    left: 0px;
     z-index: 1;
 }
 
