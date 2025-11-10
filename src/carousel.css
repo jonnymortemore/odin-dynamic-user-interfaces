@@ -1,0 +1,35 @@
+.carousel-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 400px;
+}
+
+.carousel-button {
+    height: 100%;
+    width: 50px;
+    background-color: transparent;
+    border: none;
+    color: black;
+}
+
+.carousel-button:hover {
+    background-color: var(--dark-background-color);
+}
+
+.carousel-view-window {
+   overflow: hidden;
+   border: var(--standard-border);
+   width: 800px;
+   height: 400px;
+}
+
+.carousel-item-container {
+    position: relative;
+    left: 0;
+    transition: left 0.8s ease;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+}
