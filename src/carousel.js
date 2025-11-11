@@ -8,18 +8,24 @@ export class Carousel {
         rightButton = document.querySelector(".carousel-button.right"),
         viewWindow = document.querySelector(".carousel-view-window"),
         itemContainer = document.querySelector(".carousel-item-container"),
-        carouselItems = document.querySelectorAll(".carousel-item"),
     ) {
         this.container = container;
         this.leftButton = leftButton;
         this.rightButton = rightButton;
         this.viewWindow = viewWindow;
         this.itemContainer = itemContainer;
-        this.carouselItems = carouselItems;
+        this.setupCarouselItems();
+
         this.fitItemsToRightSize();
         this.setupButtons();
 
-        setTimeout(this.timeoutMove.bind(this), this.#carouselRotate);
+        //setTimeout(this.timeoutMove.bind(this), this.#carouselRotate);
+    }
+
+    setupCarouselItems() {
+        const copiedFirstChild = this.itemContainer.firstElementChild.cloneNode();
+        this.itemContainer.appendChild(copiedFirstChild);
+        this.carouselItems = this.itemContainer.querySelectorAll("*");
     }
 
     fitItemsToRightSize() {
@@ -56,7 +62,7 @@ export class Carousel {
             left = 0;
         } 
         if (left < maxTravel && direction === "right") {
-            left = maxTravel;
+            left = width;
         }
         this.itemContainer.style.left = `${left}px`;
     }
