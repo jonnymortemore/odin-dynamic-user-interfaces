@@ -1,4 +1,7 @@
 export class Carousel {
+
+    #carouselRotate = 5000;
+
     constructor(
         container = document.querySelector(".carousel-container"),
         leftButton = document.querySelector(".carousel-button.left"),
@@ -15,12 +18,20 @@ export class Carousel {
         this.carouselItems = carouselItems;
         this.fitItemsToRightSize();
         this.setupButtons();
+
+        setTimeout(this.timeoutMove.bind(this), this.#carouselRotate);
     }
 
     fitItemsToRightSize() {
         this.carouselItems.forEach((item) => {
             item.width = this.viewWindow.clientWidth;
         })
+    }
+
+    timeoutMove() {
+        const width = this.viewWindow.clientWidth;
+        this.moveCarousel(-width, "right");
+        setTimeout(this.timeoutMove.bind(this), this.#carouselRotate);
     }
 
     setupButtons() {
