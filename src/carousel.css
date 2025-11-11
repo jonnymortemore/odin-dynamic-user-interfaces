@@ -28,7 +28,6 @@
 .carousel-item-container {
     position: relative;
     left: 0;
-    transition: left 0.8s ease;
     white-space: nowrap;
     display: flex;
     flex-direction: row;

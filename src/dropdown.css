@@ -20,18 +20,18 @@
 }
 
 .dropdown {
-    position: absolute;
-    display: flex;
-    background-color: var(--dark-background-color);
-    flex-direction: column;
-    border: var(--dark-border);
-    border-radius: var(--standard-radius);
-    box-shadow: 5px 5px 5px rgba(0,0,0, 0.4);
-    overflow: hidden;
-    width: 100%;
-    top: 0px;
-    left: 0px;
-    z-index: 1;
+  position: absolute;
+  display: flex;
+  background-color: var(--dark-background-color);
+  flex-direction: column;
+  border: var(--dark-border);
+  border-radius: var(--standard-radius);
+  box-shadow: 5px 5px 5px rgba(0,0,0, 0.4);
+  overflow: hidden;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
 }
 
 
