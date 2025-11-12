@@ -1,8 +1,6 @@
 export class Carousel {
     #carouselRotate = 5000;
     #standardTransition = "left 0.8s ease";
-    #slideCountCurr = 1;
-    #slideCountMax = 0;
 
     constructor(
         container = document.querySelector(".carousel-container"),
@@ -23,8 +21,8 @@ export class Carousel {
         this.setupItemContainer();
         this.setupCarouselItems();
         this.setupNavigator();
-        
-        this.#slideCountMax = this.carouselItems.length - 2
+        this.slideCountCurr = 1;
+        this.slideCountMax = this.carouselItems.length - 2
         this.maxTravel = -(
             Math.abs(this.width) *
             (this.carouselItems.length - 1)
@@ -53,7 +51,7 @@ export class Carousel {
             this.navigator.appendChild(navPoint);
             navPoint.addEventListener("click", (evt) => {
                 const slide = parseInt(evt.target.dataset.slide);
-                this.moveCarousel(-this.width * slide, slide, true);
+                this.moveCarousel(slide, true);
             })
         }
     }
@@ -61,7 +59,7 @@ export class Carousel {
     changeNavPoint() {
         this.navigator.querySelectorAll(".nav-point").forEach((nav) => {
         nav.className = "nav-point";
-        if (nav.id === `slide_nav_${this.#slideCountCurr}`) {
+        if (nav.id === `slide_nav_${this.slideCountCurr}`) {
             nav.classList.add("selected");
         }
        });
@@ -77,10 +75,13 @@ export class Carousel {
             if (left === this.maxTravel) {
                 this.itemContainer.style.transition = "none";
                 this.itemContainer.style.left = `-${this.width}px`;
+                this.slideCountCurr = 1
             } else if (left === 0) {
                 this.itemContainer.style.transition = "none";
                 this.itemContainer.style.left = `${this.maxTravel + this.width}px`;
+                this.slideCountCurr = this.slideCountMax
             }
+        
             this.changeNavPoint();
         });
         this.itemContainer.style.left = `-${this.width}px`;
@@ -103,43 +104,39 @@ export class Carousel {
     }
 
     timeoutMove() {
-        this.moveCarousel(-this.width, 1, false);
+        this.moveCarousel(1, false);
         setTimeout(this.timeoutMove.bind(this), this.#carouselRotate);
     }
 
     setupButtons() {
         this.leftButton.addEventListener("click", () => {
-            this.moveCarousel(this.width, -1, false);
+            this.moveCarousel(-1, false);
             console.log("move left");
         });
 
         this.rightButton.addEventListener("click", () => {
-            this.moveCarousel(-this.width, 1, false);
+            this.moveCarousel(1, false);
             console.log("move right");
         });
     }
 
 
-    moveCarousel(width, currentSlide, set) {
+    moveCarousel(currentSlide, set) {
         this.itemContainer.style.transition = this.#standardTransition;
         // gets the final style for the element
-        let left = parseInt(
-            window.getComputedStyle(this.itemContainer).left,
-            10,
-        );
         if (set) {
-            left = width;
-            this.#slideCountCurr = currentSlide;
+            this.slideCountCurr = currentSlide;
         } else {
-            left += width;
-            this.#slideCountCurr += currentSlide;
+            this.slideCountCurr += currentSlide;
         }
-        if (this.#slideCountCurr > this.#slideCountMax) {
-            this.#slideCountCurr = 1
+
+        if (this.slideCountCurr > this.carouselItems.length - 1) {
+            this.slideCountCurr = this.carouselItems.length - 1
         }
-        if (this.#slideCountCurr < 1) {
-            this.#slideCountCurr = this.#slideCountMax
+
+        if (this.slideCountCurr < 0) {
+            this.slideCountCurr = 0
         }
-        this.itemContainer.style.left = `${left}px`;
+        this.itemContainer.style.left = `${this.slideCountCurr * -this.width}px`;
     }
 }
