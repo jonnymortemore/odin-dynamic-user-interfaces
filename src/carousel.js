@@ -1,6 +1,7 @@
 export class Carousel {
     #carouselRotate = 5000;
     #standardTransition = "left 0.8s ease";
+    #transitioning = false;
 
     constructor(
         container = document.querySelector(".carousel-container"),
@@ -31,7 +32,7 @@ export class Carousel {
         this.fitItemsToRightSize();
         this.setupButtons();
 
-        //setTimeout(this.timeoutMove.bind(this), this.#carouselRotate);
+        setTimeout(this.timeoutMove.bind(this), this.#carouselRotate);
     }
 
     setupNavigator() {
@@ -68,6 +69,7 @@ export class Carousel {
     setupItemContainer() {
         // on end of transition, if at the front or back of the carouselItems, disable transition and move back to start / end
         this.itemContainer.addEventListener("transitionend", () => {
+            this.#transitioning = false;
             let left = parseInt(
                 window.getComputedStyle(this.itemContainer).left,
                 10,
@@ -104,7 +106,9 @@ export class Carousel {
     }
 
     timeoutMove() {
-        this.moveCarousel(1, false);
+        if (!this.#transitioning) {
+            this.moveCarousel(1, false);
+        }
         setTimeout(this.timeoutMove.bind(this), this.#carouselRotate);
     }
 
@@ -138,5 +142,6 @@ export class Carousel {
             this.slideCountCurr = 0
         }
         this.itemContainer.style.left = `${this.slideCountCurr * -this.width}px`;
+        this.#transitioning = true;
     }
 }
